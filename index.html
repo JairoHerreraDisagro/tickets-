@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Soporte</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sección de portada -->
+    <div class="portada">
+        <img src="portada.png" alt="Imagen de portada">
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <div class="wrapper">
+            <div class="logo-container">
+                <img src="Logo.png" alt="Logo de la empresa">
+            </div>
+            <h2>Gestión de Incidencias Técnicas</h2>
+
+            <form id="soporteForm">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" required>
+                
+                <label for="pais">País:</label>
+                <select id="pais" required>
+                    <option value="" disabled selected>Seleccione su país</option>
+                    <option value="Belice">Belice</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Costa Rica">Costa Rica</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Honduras">Honduras</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Panamá">Panamá</option>
+                </select>
+
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+                
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required>
+                
+                <label for="celular">Celular:</label>
+                <input type="tel" id="celular" required>
+                
+                <label for="empresa">Empresa o Razón Social:</label>
+                <input type="text" id="empresa" required>
+                
+                <label for="Software">Software:</label>
+                <select id="Software" required>
+                    <option value="Software de administración de fincas">Software de Administración de Fincas</option>
+                    <option value="ERP">ERP</option>
+                    <option value="Planilla Agrícola">Planilla Agrícola</option>
+                </select>
+
+                <label for="problema">Descripción del problema:</label>
+                <textarea id="problema" rows="4" required></textarea>
+                
+                <label for="archivo" class="file-label">Seleccionar archivos</label>
+                <input type="file" id="archivo" multiple>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal (para mostrar el círculo de carga y confirmación) -->
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="modal-message"></span>
+            <div class="spinner" id="loading-spinner"></div>
+            <button id="close-modal" style="display: none;" onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
