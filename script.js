@@ -6,12 +6,15 @@ document.getElementById("soporteForm").addEventListener("submit", async function
     let archivosBase64 = [];
 
     for (let archivo of archivos) {
-        if (archivo.size > 15 * 1024 * 1024) { // Límite de 5MB por archivo
-            alert(`El archivo "${archivo.name}" supera el límite de 5MB.`);
+        if (archivo.size > 15 * 1024 * 1024) { // Límite de 15MB por archivo
+            alert(`El archivo "${archivo.name}" supera el límite de 15MB.`);
             return;
         }
         let base64 = await convertirArchivoBase64(archivo);
-        archivosBase64.push({ nombre: archivo.name, contenido: base64 });
+        archivosBase64.push({
+            nombre: archivo.name,
+            contenido: base64 // contenido limpio sin encabezado MIME
+        });
     }
 
     mostrarModal("Enviando solicitud... <br><br> <span class='loading-spinner'></span>");
@@ -21,14 +24,17 @@ document.getElementById("soporteForm").addEventListener("submit", async function
 
 async function convertirArchivoBase64(archivo) {
     return new Promise((resolve, reject) => {
-        let reader = new FileReader();
+        const reader = new FileReader();
         reader.readAsDataURL(archivo);
-reader.onload = function(e) {
-  const base64SinEncabezado = e.target.result.split(",")[1];
-  archivosBase64.push({
-    nombre: archivo.name,
-    contenido: base64SinEncabezado
-  });
+        reader.onload = function(e) {
+            // Quitar encabezado tipo data:application/pdf;base64,...
+            const base64SinEncabezado = e.target.result.split(",")[1];
+            resolve(base64SinEncabezado);
+        };
+        reader.onerror = function(error) {
+            reject(error);
+        };
+    });
 }
 
 async function enviarFormulario(archivosBase64) {
@@ -57,7 +63,6 @@ async function enviarFormulario(archivosBase64) {
             setTimeout(() => cerrarModal(), 3000);
             document.getElementById("soporteForm").reset();
 
-            // Verifica si el elemento "erpOptions" existe antes de modificarlo
             let erpOptions = document.getElementById("erpOptions");
             if (erpOptions) {
                 erpOptions.style.display = "none";
@@ -73,7 +78,6 @@ async function enviarFormulario(archivosBase64) {
     }
 }
 
-
 // Función para mostrar el modal
 function mostrarModal(mensaje) {
     let modal = document.getElementById("modal");
@@ -88,6 +92,7 @@ function cerrarModal() {
     modal.style.display = "none";
 }
 
+// Mostrar opciones ERP
 function mostrarOpcionesERP() {
     var softwareSeleccionado = document.getElementById("Software").value;
     var erpOptions = document.getElementById("erpOptions");
@@ -99,6 +104,7 @@ function mostrarOpcionesERP() {
     }
 }
 
+// Obtener problemas ERP seleccionados
 function obtenerProblemasERP() {
     let checkboxes = document.querySelectorAll('input[name="erpProblema"]:checked');
     return Array.from(checkboxes).map(checkbox => checkbox.value);
