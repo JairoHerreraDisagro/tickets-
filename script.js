@@ -23,9 +23,12 @@ async function convertirArchivoBase64(archivo) {
     return new Promise((resolve, reject) => {
         let reader = new FileReader();
         reader.readAsDataURL(archivo);
-        reader.onload = () => resolve(reader.result.split(",")[1]);
-        reader.onerror = error => reject(error);
-    });
+reader.onload = function(e) {
+  const base64SinEncabezado = e.target.result.split(",")[1];
+  archivosBase64.push({
+    nombre: archivo.name,
+    contenido: base64SinEncabezado
+  });
 }
 
 async function enviarFormulario(archivosBase64) {
