@@ -53,10 +53,25 @@
                 
                 <label for="Software">Software:</label>
                 <select id="Software" required>
-                    <option value="Software de administración de fincas">Software de Administración de Fincas</option>
                     <option value="ERP">ERP</option>
                     <option value="Planilla Agrícola">Planilla Agrícola</option>
                 </select>
+
+			<label for="categoria">Categoría del problema:</label>
+			<select id="categoria" required>
+			    <option value="" disabled selected>Seleccione una categoría</option>
+			    <option value="Anulación de documentos">Anulación de documentos</option>
+			    <option value="Carga de documentos">Carga de documentos</option>
+			    <option value="Inicio de sesión">Inicio de sesión</option>
+			    <option value="Emisión de documentos">Emisión de documentos</option>
+			    <option value="Errores de cálculo">Errores de cálculo</option>
+			    <option value="Integración de sistemas">Integración de sistemas</option>
+			    <option value="Sincronización incorrecta">Sincronización incorrecta</option>
+			    <option value="Problemas de rendimiento">Problemas de rendimiento</option>
+			    <option value="Datos incoherentes">Datos incoherentes</option>
+			    <option value="Otro">Otro</option>
+			    <option value="Solicitud">Solicitud</option>
+			</select>
 
                 <label for="problema">Descripción del problema:</label>
                 <textarea id="problema" rows="4" required></textarea>
