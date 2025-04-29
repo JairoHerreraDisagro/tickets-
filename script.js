@@ -46,6 +46,7 @@ async function enviarFormulario(archivosBase64) {
         celular: document.getElementById("celular").value.trim(),
         empresa: document.getElementById("empresa").value.trim(),
         sistema: document.getElementById("Software").value,
+        categoria: document.getElementById("categoria").value,
         problema: document.getElementById("problema").value.trim(),
         problemasERP: obtenerProblemasERP(),
         archivos: archivosBase64
