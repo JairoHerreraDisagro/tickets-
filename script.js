@@ -53,7 +53,7 @@ async function enviarFormulario(archivosBase64) {
     };
 
     try {
-        let respuesta = await fetch("https://prod-16.westus.logic.azure.com:443/workflows/2cfaeb058ecb47e5b679c083da7b1d44/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pbZy62GIyFMt6GheeC82rP90gXBdwiLfE2hWjz_BQZQ", {
+        let respuesta = await fetch("https://default93a2cd4474774ba69ca3e4e7aaf9c2.dd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/2cfaeb058ecb47e5b679c083da7b1d44/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GMvP8RTM1iuCIDplTwKKlbzqCwS-q79a_74FRb81G6s", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)
@@ -110,3 +110,4 @@ function obtenerProblemasERP() {
     let checkboxes = document.querySelectorAll('input[name="erpProblema"]:checked');
     return Array.from(checkboxes).map(checkbox => checkbox.value);
 }
+
